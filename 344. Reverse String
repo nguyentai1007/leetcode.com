@@ -3,12 +3,11 @@ Write a function that takes a string as input and returns the string reversed.
 Example:
 Given s = "hello", return "olleh".
 
-char* reverseString(char* s) {
-    int n = sizeof(s);
-    char* temp = (char *)malloc(sizeof(s));
+char* reverseString(char* s){
+	char* str= (char * ) malloc (sizeof(s));
 	int len = strlen(s);
-	for(int i = 0; i <len; i++){
-		temp[i]= s[len-i-1];
+	for(int i = 0; i<len; i++){
+		str[i]= s[len-i-1];
 	}
-    return temp;
+	return str;
 }
