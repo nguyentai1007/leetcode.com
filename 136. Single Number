@@ -1,0 +1,54 @@
+Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Example 1:
+
+Input: [2,2,1]
+Output: 1
+Example 2:
+
+Input: [4,1,2,1,2]
+Output: 4
+
+1, C# tham khao
+public class Solution {
+    public int SingleNumber(int[] nums) {
+        int result = 0;
+        
+        foreach (int num in nums)
+        {
+            result ^= num;
+        }
+        
+        return result;
+    }
+}
+
+2, C# me -_-
+public class Solution {
+    public int SingleNumber(int[] nums) {
+        Array.Sort(nums);
+        int n = nums[0];
+        int sum = 1;
+        int i;
+        for (i = 1; i < nums.Length; i++) {
+            if (n == nums[i])
+                sum += 1;
+            else if (sum == 1)
+                    if (n == nums[0])
+                        return nums[0];
+                    else return n;
+            else
+            {
+                n = nums[i];
+                sum = 1;
+            }
+        }
+        if (i==nums.Length && sum == 1)
+             return n;
+        return -1;
+    }
+}
