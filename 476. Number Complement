@@ -12,28 +12,21 @@ Input: 1
 Output: 0
 Explanation: The binary representation of 1 is 1 (no leading zero bits), and its complement is 0. So you need to output 0.
 
-int findComplement(int num) {    
-    return convertND(convertBF(num));
-}
-int convertBF(int num){
-    int a,b = 0 , i = 1;
-    while(num != 0){
-        a = 0;
-        if (num%2==0)
-            a = 1;
-        num /= 2;
-        b += a*i;
-        i *= 10;
+C#
+public class Solution {
+    public int FindComplement(int num) {
+        int a,sum,i;
+        sum = 0;
+        i = 1;        
+        while (num >0){
+            a = num%2;
+            if (a==1) a = 0;
+            else a = 1;
+            a *= i;
+            i *= 2;
+            num /= 2;
+            sum += a ;
+        }
+        return sum;
     }
-    return b;
-}
-int convertND(int num){
-    int d = 0, i = 0, a;    
-    while(num != 0){
-        a = num%10;
-        num /=10;
-        d += a * pow(2,i);
-        ++i;
-    }
-    return d;
 }
