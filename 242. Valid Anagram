@@ -1,0 +1,55 @@
+Given two strings s and t , write a function to determine if t is an anagram of s.
+
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+Example 2:
+
+Input: s = "rat", t = "car"
+Output: false
+Note:
+You may assume the string contains only lowercase alphabets.
+
+Follow up:
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+C#
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if (s.Length != t.Length) return false;
+        IList<char> list = new List<char>();
+        foreach (char c in s)
+            list.Add(c);
+        foreach (char c in t) {
+            if (list.IndexOf(c) != -1)
+            {
+                list.Remove(c);
+            }
+        }
+        if(list.Count == 0)
+            return true;
+        return false;
+    }
+}
+
+C# tham khao
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        int[] hash = new int[26];
+        foreach(var ch in s)
+            hash[ch - 'a']++;
+        
+        foreach(var ch in t){
+            hash[ch - 'a']--;
+            if(hash[ch - 'a'] < 0)
+                return false;
+        }
+        
+        for(int i = 0; i < hash.Length; i++){
+            if(hash[i] != 0)
+                return false;
+        }
+        return true;
+    }
+}
