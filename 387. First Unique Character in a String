@@ -1,0 +1,57 @@
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+Examples:
+
+s = "leetcode"
+return 0.
+
+s = "loveleetcode",
+return 2.
+Note: You may assume the string contain only lowercase letters.
+
+C#
+public class Solution {
+    public int FirstUniqChar(string s) {
+        int[] count = new int[256];
+        IList<char> list = new List<char>();
+        IList<int> pos = new List<int>();
+        for(int i=0; i< s.Length; i++)
+            if (list.IndexOf(s[i]) == -1) 
+            {
+                list.Add(s[i]);
+                pos.Add(i);
+            }
+            else
+            {
+                count[list.IndexOf(s[i])]++;
+            }
+        for (int i = 0; i < list.Count; i++) 
+        {
+            if (count[i] ==0)
+                return pos.ElementAt(i);
+        }
+        return -1;
+    }
+}
+
+JAVA : tham khao
+public class Solution {
+    public int FirstUniqChar(string s) {
+        var charHash = new int[128];
+        int len = s.Length;
+        
+        foreach( char c in s ){
+            charHash[(int)c]++;
+        }
+        
+        for( int i = 0; i < len; i++ ){
+            if(charHash[(int)s[i]] == 1){
+                return i;
+            }
+        }
+       
+       
+        //Not found
+        return -1;
+    }
+}
