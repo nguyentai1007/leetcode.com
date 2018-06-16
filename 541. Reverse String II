@@ -1,0 +1,80 @@
+Given a string and an integer k, you need to reverse the first k characters for every 2k characters counting from the start of the string. If there are less than k characters left, reverse all of them. If there are less than 2k but greater than or equal to k characters, then reverse the first k characters and left the other as original.
+Example:
+Input: s = "abcdefg", k = 2
+Output: "bacdfeg"
+Restrictions:
+The string consists of lower English letters only.
+Length of the given string and k will in the range [1, 10000]
+
+C#
+public class Solution {
+    public string ReverseStr(string s, int k) {
+        string st ="";
+        int len1 = 0,len2 = 0;
+        int count;
+        count = s.Length/k;
+        if(s.Length % k != 0)
+            count += 1;
+        for (int i = 0; i < count; i++) 
+        {
+            len1 = i*k;
+            len2 = k;
+            switch (i % 2) 
+            { 
+                case 0:
+                    if (len1+k > s.Length - 1)
+                        len2 = s.Length  - len1;
+                    st = String.Concat(st, CutStringReverse(s, len1,len2));
+                    break;
+                case 1:
+                    if(len1+k > s.Length-1)
+                        len2 = s.Length - len1;
+                    st = String.Concat(st, CutString(s, len1, len2));
+                    break;
+            }
+        }
+        return st;
+    }
+    public string CutStringReverse(string s,int k1, int k2) 
+    {
+        return new string(s.Substring(k1, k2).Reverse().ToArray());
+    }
+        //
+    public string CutString(string s,int k1, int k2) 
+    {
+        return new string(s.Substring(k1, k2).ToArray());
+    }
+}
+
+# Tham khao, giu nguyen String, chi dao nhung vi tri can dao
+## Java
+public class Solution {
+    public string ReverseStr(string s, int k) {
+        char[] array = s.ToCharArray();
+        
+        int pos = 0;
+        while (pos < array.Length) {
+            if (pos + k < array.Length) {
+                ReverseStr(array, k, pos);
+            } else {
+                ReverseStr(array, array.Length - pos, pos);
+            }
+            
+            pos += 2*k;
+        }
+        
+        return new string(array);
+    }
+    
+    void ReverseStr(char[] array, int k, int pos) {
+        int end = pos+k-1;
+        char tmp;
+        while (pos < end) {
+            tmp = array[pos];
+            array[pos] = array[end];
+            array[end] = tmp;
+            pos++;
+            end--;
+        }
+    }
+}
