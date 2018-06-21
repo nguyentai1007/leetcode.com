@@ -1,0 +1,25 @@
+Given an integer, write a function to determine if it is a power of two.
+
+Example 1:
+
+Input: 1
+Output: true 
+Explanation: 20 = 1
+Example 2:
+
+Input: 16
+Output: true
+Explanation: 24 = 16
+Example 3:
+
+Input: 218
+Output: false
+Hint : 
+An integer will be power of 2 only if it has only one bit set and n-1 will give us all but the MSB set . Hence its & will give a zero if its a power of 2 .
+
+C#
+public class Solution {
+    public bool IsPowerOfTwo(int n) {
+        return n>0 && (n&(n-1))==0;
+    }
+}
